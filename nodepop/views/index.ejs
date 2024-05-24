@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div>
+      <% adverts.forEach (advert => { %>
+        <div class='cont-ad'>
+          <h3> <%= advert.name %> - <%= advert.price %> EUR </h3>
+          <p>
+            <% if (advert.sell) { %>
+              <p>Type: Selling</p>
+            <% } else { %>
+              <p>Type: Searching</p>
+            <% } %>
+          </p>
+          <img src='../images/<%= advert.photo %>' alt='<%= advert.name %>'>
+          <p>Tags: <%= advert.tags %></p>
+        </div>
+      <% }) %>
+    </div>
+  </body>
+</html>
