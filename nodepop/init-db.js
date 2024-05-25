@@ -4,8 +4,8 @@
 const readline = require('node:readline');
 //connect to db
 const connection = require('./lib/connectMongoose');
-//import Advert
-const Advert = require('./models/Advert');
+//import Advert and User
+const {Advert, User} = require('./models');
 
 const exadverts = require('./ex-adverts.json')
 
@@ -21,11 +21,27 @@ async function main() {
     if (!deletedb) {
         process.exit();
     }
+
+    await initUsers();
     await initAdverts();
 
     connection.close();
 
 }
+
+async function initUsers() {
+    // delete all users data 
+    const deleted = await User.deleteMany(); 
+    console.log(`Deleted ${deleted.deletedCount} users.`)
+    
+    // create example users
+    const inserted = await User.insertMany([
+        { email: 'admin@example.com', password: '1234' },
+        { email: 'user@example.com', password: '1234' }
+    ])
+    console.log(`Created ${inserted.length} users.`)
+}
+
 
 async function initAdverts() {
 

@@ -1,6 +1,10 @@
-# NodePop Application
+# NodePop aplication: Multilingual & JWT version
+
+This project is built using my previous project, Nodepop, which is available on GitHub. The documentation below includes changes made in this version as well as the usage instructions for the original version.
 
 NodePop is a web application built using Node.js and MongoDB that allows users to post and browse advertisements. This README provides information on how to set up and use the application, as well as details on initializing the database.
+
+This version introduces multi-language support, JWT authentication, and image uploads processed via background tasks.
 
 ## Features
 - Home Page: Displays a list of advertisments and offers filter, sorting and pagination functionalities.

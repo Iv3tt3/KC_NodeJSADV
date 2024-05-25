@@ -5,12 +5,14 @@ const advertSchema = mongoose.Schema({
     name: { 
         type: String, 
         required: true, 
-        minlength: [1, 'Name must contain at least 1 character'] 
+        minlength: [1, 'Name must contain at least 1 character'],
+        index: true
         },
 
     sell: {
         type: Boolean, 
-        required: true 
+        required: true,
+        index: true
         },
 
     price: { 
@@ -24,7 +26,8 @@ const advertSchema = mongoose.Schema({
                 return /^\d+(\.\d{1,2})?$/.test(value);
             },
             message: props => `${props.value} is not a valid price. Price must have up to 2 decimal places.`
-        }
+        },
+        index: true
         },
 
     photo: {
@@ -45,7 +48,8 @@ const advertSchema = mongoose.Schema({
         enum: {
             values: ['work', 'lifestyle', 'motor', 'house', 'clothes', 'sports', 'tech' ,'other'],
             message: 'Only this tags are allowed: Work, Lifestyle, Motor, House, Clothes, Sports, Tech, Other' 
-        }
+        },
+        index: true
     }],
 });
 
