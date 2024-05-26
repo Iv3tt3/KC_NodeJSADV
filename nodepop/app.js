@@ -3,7 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const basicAuth = require('./lib/basicAuth')
+const basicAuth = require('./lib/basicAuth');
+const LoginController = require('./controllers/LoginController');
+
+
+const loginController = new LoginController();
 
 // Execute module to connect db
 require('./lib/connectMongoose')
@@ -28,6 +32,7 @@ app.use('/api/adverts', basicAuth, require('./routes/api/adverts'));
 // Website routes
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
+app.get('/login', loginController.index)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

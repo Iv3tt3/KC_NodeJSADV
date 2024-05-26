@@ -1,0 +1,36 @@
+#login-form{
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#login-form div{
+    display: grid;
+    gap: 10pt;
+    margin: 20pt
+}
+
+#login-form input{
+    border-radius: 10px;
+    border: 1pt solid lightblue;
+    padding: 5pt;
+}
+
+.btn {
+    border-radius: 10pt;
+    border: 1pt solid white;
+    background-color: rgb(143, 205, 225);
+    height: 150%;
+    margin-top: 10pt;
+    font-size: 16px;
+}
+.btn:hover {
+    background-color: rgb(37, 58, 83);
+    color:white;
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+}
+
+@media (min-width:350px) {
+    #login-form{
+        width: 350px;
+    }
+}
