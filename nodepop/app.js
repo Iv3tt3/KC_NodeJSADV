@@ -32,7 +32,8 @@ app.use('/api/adverts', basicAuth, require('./routes/api/adverts'));
 // Website routes
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
-app.get('/login', loginController.index)
+app.get('/login', loginController.index);
+app.post('/login', loginController.post);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

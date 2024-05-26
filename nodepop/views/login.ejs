@@ -7,19 +7,20 @@
   <body>
     <h1></h1>
     <div>
-        <form id="login-form">
+        <form method="POST" id="login-form">
             <div>
                 <label for="email">Email</label>
-                <input type="text" id="email" required/>
+                <input type="text" id="email" name="email" value="<% email %>" required/>
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" id="password" required/>
+                <input type="password" name="password" id="password" required/>
             </div>
             <div> 
                 <input class="btn" type="submit" value="Login">
             </div>
           </form>
     </div>
+    <p><% error %></p>
   </body>
 </html>
