@@ -29,6 +29,12 @@
     cursor: pointer;
 }
 
+.error {
+    margin-top: 80px;
+    background-color: lightcoral;
+    padding: 20pt;
+}
+
 @media (min-width:350px) {
     #login-form{
         width: 350px;

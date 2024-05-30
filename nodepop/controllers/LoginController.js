@@ -2,9 +2,9 @@ const {User} = require('../models')
 
 class LoginController {
     index(req, res, next) {
-        res.locals.error = '';
-        res.locals.email = '';
-        res.render('login')
+      res.locals.error = 'ERROR';
+      res.locals.email = '';
+      res.render('login')
     }
     
     async post(req, res, next) {
@@ -18,7 +18,6 @@ class LoginController {
             if (!user || !(await user.comparePassword(password))) {
               res.locals.error = 'Invalid credentials';
               res.locals.email = email;
-              console.log('Invalid email')
               res.render('login');
               return;
             }

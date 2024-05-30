@@ -10,7 +10,7 @@
         <form method="POST" id="login-form">
             <div>
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" value="<% email %>" required/>
+                <input type="text" id="email" name="email" value="<%= email %>" required/>
             </div>
             <div>
                 <label for="password">Password</label>
@@ -21,6 +21,6 @@
             </div>
           </form>
     </div>
-    <p><% error %></p>
+    <div class='error'><%= error %></div>
   </body>
 </html>
