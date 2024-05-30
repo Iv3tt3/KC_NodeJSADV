@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+//import env variables
+require('dotenv').config()
+
 /**
  * Module dependencies.
  */

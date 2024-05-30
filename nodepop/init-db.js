@@ -1,5 +1,8 @@
 'use strict'
 
+//import env variables
+require('dotenv').config()
+
 // import library to add a security question
 const readline = require('node:readline');
 //connect to db
