@@ -8,7 +8,7 @@ class LoginController {
         return;
       }
       
-      res.locals.error = 'ERROR';
+      res.locals.error = '';
       res.locals.email = '';
       res.render('login')
     }
