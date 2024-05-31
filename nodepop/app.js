@@ -55,6 +55,7 @@ app.use('/users', require('./routes/users'));
     // Using controllers
 app.get('/login', loginController.index);
 app.post('/login', loginController.post);
+app.get('/logout', loginController.logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
