@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+        <h1>NodePop</h1>
+        <nav>
+            <% if (session.userId) { %>
+                <a href="/logout">Logout</a>
+            <% } else { %>
+                <a href="/login">Logout</a>
+            <% } %>
+                <a href="/myads">My Ads</a>
+        </nav>
+    </header>

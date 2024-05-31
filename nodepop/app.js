@@ -45,6 +45,10 @@ app.use(session({
     mongoUrl: process.env.MONGODB_URL
   })
 }))
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+})
 
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
