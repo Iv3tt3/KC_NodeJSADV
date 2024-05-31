@@ -3,7 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const basicAuth = require('./lib/basicAuth');
+const sessionAuth = require('./lib/sessionAuth');
 const LoginController = require('./controllers/LoginController');
 
 
@@ -30,8 +33,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/adverts', basicAuth, require('./routes/api/adverts'));
 
 // Website routes
+app.use(session({
+  name: 'nodepop-session',
+  secret: process.env.SESSION_SECRET,
+  saveUninitialized: true, 
+  resave: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 2 // 2 days expiration
+  },
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URL
+  })
+}))
+
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
+    // Using controllers
 app.get('/login', loginController.index);
 app.post('/login', loginController.post);
 

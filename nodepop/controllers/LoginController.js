@@ -2,6 +2,12 @@ const {User} = require('../models')
 
 class LoginController {
     index(req, res, next) {
+      // if user is logged in redirect to index
+      if (req.session.userId) {
+        res.redirect('/');
+        return;
+      }
+      
       res.locals.error = 'ERROR';
       res.locals.email = '';
       res.render('login')
@@ -21,7 +27,11 @@ class LoginController {
               res.render('login');
               return;
             }
-            
+
+            // Save user id in the session
+            req.session.userId = user._id;
+
+
             // when correct credentials
             res.redirect('/');
             console.log(redirect)
@@ -30,5 +40,7 @@ class LoginController {
         next(error);
       }
     }
+
+    
 }
 module.exports = LoginController
