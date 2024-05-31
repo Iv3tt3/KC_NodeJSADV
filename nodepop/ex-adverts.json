@@ -4,21 +4,24 @@
     "sell": true,
     "price": 200.15,
     "photo": "bike.jpeg",
-    "tags": ["lifeStyle", "Sports"]
+    "tags": ["lifeStyle", "Sports"],
+    "owner": "665364d8648859c8516c5b32"
     },
     {
     "name": "Sofa",
     "sell": false,
     "price": 18,
     "photo": "sofa.png",
-    "tags": ["lifeStyle", "house"]
+    "tags": ["lifeStyle", "house"],
+    "owner": "665364d8648859c8516c5b32"
     },
     {
     "name": "Mac",
     "sell": true,
     "price": 1800,
     "photo": "macbook.png",
-    "tags": "tech"
+    "tags": "tech",
+    "owner": "665364d8648859c8516c5b32"
     },
     {
     "name": "Sweater",
@@ -32,6 +35,7 @@
     "sell": false,
     "price": 150,
     "photo": "phone.jpeg",
-    "tags": "tech"
+    "tags": "tech",
+    "owner": "665364d8648859c8516c5b32"
     }
 ]

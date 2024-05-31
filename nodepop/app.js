@@ -8,9 +8,11 @@ const MongoStore = require('connect-mongo');
 const basicAuth = require('./lib/basicAuth');
 const sessionAuth = require('./lib/sessionAuth');
 const LoginController = require('./controllers/LoginController');
+const PrivateController = require('./controllers/PrivateController');
 
 
 const loginController = new LoginController();
+const privateController = new PrivateController();
 
 // Execute module to connect db
 require('./lib/connectMongoose')
@@ -56,6 +58,7 @@ app.use('/users', require('./routes/users'));
 app.get('/login', loginController.index);
 app.post('/login', loginController.post);
 app.get('/logout', loginController.logout);
+app.get('/private', sessionAuth, privateController.index)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

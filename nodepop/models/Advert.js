@@ -51,6 +51,7 @@ const advertSchema = mongoose.Schema({
         },
         index: true
     }],
+    owner: { ref: 'User', type: mongoose.Schema.ObjectId },
 });
 
 // Middleware pre to convert tags to lowercase
