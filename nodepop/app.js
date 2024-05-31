@@ -5,14 +5,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const basicAuth = require('./lib/basicAuth');
 const sessionAuth = require('./lib/sessionAuth');
+const jwtAuth = require('./lib/jwtAuth');
 const LoginController = require('./controllers/LoginController');
 const PrivateController = require('./controllers/PrivateController');
+const ApiLoginController = require('./controllers/api/ApiLoginController');
 
 
 const loginController = new LoginController();
 const privateController = new PrivateController();
+const apiLoginController = new ApiLoginController();
 
 // Execute module to connect db
 require('./lib/connectMongoose')
@@ -31,8 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // API routes
-// Includes basicAuth to allow only authorized user to use API
-app.use('/api/adverts', basicAuth, require('./routes/api/adverts'));
+// Includes jwt to allow only authorized user to use API
+app.post('/api/login', apiLoginController.post);
+app.use('/api/adverts', jwtAuth, require('./routes/api/adverts'));
 
 // Website routes
 app.use(session({
