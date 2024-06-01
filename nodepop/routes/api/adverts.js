@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const Advert = require('../../models/Advert');
+const upload = require('../../lib/uploadConfig')
+const scaleImage = require('../../lib/scaleConfig')
 
 /* GET listing. */
 router.get('/', async function(req, res, next) {
@@ -117,12 +119,16 @@ router.put('/:id', async (req, res, next) => {
 });
 
 // Create new advert  POST /api/adverts (body)
-router.post('/', async (req, res, next) => {
+router.post('/', upload.single('photo'), async (req, res, next) => {
     try {
       const data = req.body;
   
       // create a new advert
       const advert = new Advert(data);
+      // add photo to advert
+      advert.photo = req.file.filename;
+      const thumb = await scaleImage(req.file.filename)
+      advert.thumb = thumb;
   
       // save to db
       const savedAdvert = await advert.save();

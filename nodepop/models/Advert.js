@@ -42,6 +42,10 @@ const advertSchema = mongoose.Schema({
         }
         },
 
+    thumb: {
+        type: String, 
+        },
+
     tags: [{
         type: String, 
         required: true,
