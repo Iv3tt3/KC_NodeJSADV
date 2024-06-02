@@ -7,11 +7,13 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const sessionAuth = require('./lib/sessionAuth');
 const jwtAuth = require('./lib/jwtAuth');
+const i18n = require('./lib/i18nLanguageConfig');
+const LangController = require('./controllers/LanguageController');
 const LoginController = require('./controllers/LoginController');
 const PrivateController = require('./controllers/PrivateController');
 const ApiLoginController = require('./controllers/api/ApiLoginController');
 
-
+const langController = new LangController();
 const loginController = new LoginController();
 const privateController = new PrivateController();
 const apiLoginController = new ApiLoginController();
@@ -38,6 +40,12 @@ app.post('/api/login', apiLoginController.post);
 app.use('/api/adverts', jwtAuth, require('./routes/api/adverts'));
 
 // Website routes
+
+  //Language translations
+app.use(i18n.init);
+  //Language user option
+app.get('/change-locale/:locale', langController.changeLocale);
+
 app.use(session({
   name: 'nodepop-session',
   secret: process.env.SESSION_SECRET,

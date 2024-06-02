@@ -9,10 +9,15 @@
         <h1>NodePop</h1>
         <nav>
             <% if (session.userId) { %>
-                <a href="/logout">Logout</a>
+                <a href="/logout"><%= __('Logout')%></a>
             <% } else { %>
-                <a href="/login">Login</a>
+                <a href="/login"><%= __('Login')%></a>
             <% } %>
-                <a href="/private">My Ads</a>
+                <a href="/private"><%= __('My Ads')%></a>
         </nav>
+        <div>
+          <% getLocales().forEach(locale => { %>
+            <a href="/change-locale/<%= locale %>"><%= locale %></a>&nbsp;
+          <% }) %>
+       </div>
     </header>

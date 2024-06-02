@@ -8,17 +8,17 @@
           <h3> <%= advert.name %> - <%= advert.price %> EUR </h3>
           <p>
             <% if (advert.sell) { %>
-              <p>Type: Selling</p>
+              <p><%= __('Type: Selling')%></p>
             <% } else { %>
-              <p>Type: Searching</p>
+              <p><%= __('Type: Searching')%></p>
             <% } %>
           </p>
           <img src='../images/<%= advert.photo %>' alt='<%= advert.name %>'>
-          <p>Tags: <%= advert.tags %></p>
+          <p><%= __('Tags:')%> <%= advert.tags %></p>
         </div>
       <% }) %>
         <% if (adverts.length === 0) { %>
-            <p>No adverts yet</p>
+            <p><%= __('No adverts yet')%></p>
          <% } %>
     </div>
   </main>

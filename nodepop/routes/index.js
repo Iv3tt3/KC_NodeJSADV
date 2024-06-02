@@ -74,7 +74,9 @@ router.get('/',
 
         const adverts = await Advert.list(filter, skip, limit, sort, fields);
 
-  res.render('index', {title: "Nodepop adverts", adverts: adverts});
+  res.locals.title = res.__("Nodepop adverts")
+
+  res.render('index', {adverts: adverts});
   
   } catch (error){
     next(error)
