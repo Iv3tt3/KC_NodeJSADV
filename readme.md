@@ -11,6 +11,14 @@ This version introduces multi-language support, JWT authentication, and image up
 - API: Provides endpoints to display, create, update, and delete advertisements.
 - Import initial data: Allows importing custom initial data.
 
+Additional features of the new version:
+- Multi-language Support: he application now supports multiple languages, allowing users to choose their preferred language for the interface: EN/ES
+- JWT Authentication: API endpoints now require JWT authentication for enhanced security. 
+- Image Uploads: Users can upload images with their advertisements, which are processed via background tasks for efficiency creating thumbnail.
+- Login to Website: Users can now log in to the website using a session-based authentication system.
+
+For JWT authentication, include the JWT token in the Authorization header of your API requests. Use the /api/login endpoint to obtain a token.
+
 ## Technologies Used
 - Express.js: Web application framework for Node.js. 
 - MongoDB: NoSQL database for storing advertisement data.
@@ -20,6 +28,13 @@ This version introduces multi-language support, JWT authentication, and image up
 - Nodemon: Library that monitors file changes for automatic server restarts.
 - Cross-env: Library for setting environment variables cross-platform.
 - BasicAuth: Library for basic authentication.
+
+Technologies added of the new version:
+- i18n: Library for internationalization and localization.
+- jsonwebtoken: Library for handling JWT authentication. Replace BasicAuth.
+- multer: Middleware for handling multipart/form-data, used for image uploads.
+- cote: Library for building microservices and background tasks.
+- Express-session: Middleware for managing user sessions in Express applications.
 
 # Installation
 
@@ -61,7 +76,10 @@ To execute the database initialization script, run the following command:
 > You can import your own initial data. Replace data in ex-adverts.json file. Ensure your data has correct format.
 
 
-### 4. Start the Server
+### 4. Configure enviroment variables
+Change filename .env-template to .env and configure it with your secret keys.
+
+### 5. Start the Server
 Start the NodePop server.The server should now be running locally, typically on port 3000.
 
 - Development Mode: Start the application in development mode with automatic restarts using nodemon
@@ -78,9 +96,15 @@ Start the NodePop server.The server should now be running locally, typically on 
 
 Once the server is running, you can access the NodePop application through your web browser or make API requests to interact with it programmatically.
 
+## Microservice
+
+To run responder:
+
+  ```npm run micro```
+
 ### Website
 
-Open your web browser and navigate to `http://localhost:3000` to access the NodePop website. From there, you can browse existing advertisements and filter. Check ```WEBSITE FILTERS``` section below
+Open your web browser and navigate to `http://localhost:3000` to access the NodePop website. From there, you can browse existing advertisements and filter. Check ```WEBSITE FILTERS``` section below.
 
 ### API
 
@@ -94,7 +118,25 @@ NodePop also provides an API for interacting with advertisements programmaticall
 
 For detailed API documentation and usage examples, refer to the API documentation provided below.
 
-# Website filters
+# Website 
+
+## Login
+
+Use default users to login and access to Private Zone. 
+
+### Endpoint
+
+```GET /api/login```
+
+## Private zone
+
+Display ads owned form the user.
+
+### Endpoint
+
+```GET /api/private```
+
+## Website filters
 
 You can use the following parameters to filter advertisments in the home page:
 
@@ -135,7 +177,49 @@ You can use the following parameters to filter advertisments in the home page:
 
 This section provides an overview of the extended API endpoints available in the NodePop application, along with examples of how to use them.
 
-> Authentication is required to access the API endpoints of NodePop. You need to provide valid credentials to authenticate your requests. By default use following credenntials: [ username: admin | password: 1234 ]
+## Authentication
+
+> Authentication is required to access the API endpoints of NodePop. You need to provide valid credentials to authenticate your requests. ~~By default use following credenntials: [ username: admin | password: 1234 ]~~ Check new endpoint 'login' that provides token to access.
+
+### Endpoint
+
+```GET /api/login```
+
+### Request Body
+
+- `email`~~username~~: The ~~username~~ email of the user.
+- `password`: The password of the user.
+
+By default use following credenntials: 
+[ username: admin@example.com | password: 1234 ] 
+OR 
+[ username: user@example.com | password: 1234 ] 
+
+### Example Request
+```json
+{
+  "username": "admin",
+  "password": "1234"
+}
+```
+### Example Response
+```json
+{
+  "token": "your_jwt_token_here"
+}
+```
+
+### Usage
+
+Token has to be provided in the requests to API endpoints, can be send by:
+- Header as "'Authorization': 'token'"
+- Body 
+```json
+{
+  "jwt": "token"
+}
+```
+- Query params ```POST /api/login?jwt=token```
 
 ## 1. Get Advertisements
 
