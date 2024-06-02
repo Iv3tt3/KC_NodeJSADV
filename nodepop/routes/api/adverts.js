@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const Advert = require('../../models/Advert');
-const upload = require('../../lib/uploadConfig')
-const scaleImage = require('../../lib/scaleConfig')
+const upload = require('../../lib/uploadConfig');
+const {Requester} = require('cote');
+
+const requester = new Requester({name: 'requester1'})
 
 /* GET listing. */
 router.get('/', async function(req, res, next) {
@@ -119,7 +121,8 @@ router.put('/:id', async (req, res, next) => {
 });
 
 // Create new advert  POST /api/adverts (body)
-router.post('/', upload.single('photo'), async (req, res, next) => {
+router.post('/', upload.single('photo'), 
+  async (req, res, next) => {
     try {
       const data = req.body;
   
@@ -127,18 +130,28 @@ router.post('/', upload.single('photo'), async (req, res, next) => {
       const advert = new Advert(data);
       // add photo to advert
       advert.photo = req.file.filename;
-      const thumb = await scaleImage(req.file.filename)
-      advert.thumb = thumb;
+      advert.thumb = `thumb-${req.file.filename}`;    
   
-      // save to db
+      // save advert to db
       const savedAdvert = await advert.save();
   
       res.json({ result: savedAdvert });
+      next()
   
     } catch (error) {
       next(error);
     }
-});
+
+  },(req, res, next) => { 
+      const event = {
+        type: 'create-thumb', 
+        filename: req.file.filename
+      }
+      requester.send(event, res =>
+        console.log('thumb created')
+      ) 
+    }
+);
 
 
 // Delete by id   DELETE /api/agentes/<_id>

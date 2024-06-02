@@ -5,13 +5,15 @@
   "scripts": {
     "start": "cross-env NODEPOP_ENV=production node ./bin/www",
     "dev": "cross-env NODEPOP_ENV=development DEBUG=nodepop:* nodemon ./bin/www",
-    "init-db": "node init-db.js"
+    "init-db": "node init-db.js",
+    "micro": "node ./lib/thumbnailService.js"
   },
   "dependencies": {
     "basic-auth": "^2.0.1",
     "bcrypt": "^5.1.1",
     "connect-mongo": "^5.1.0",
     "cookie-parser": "~1.4.4",
+    "cote": "^1.0.3",
     "cross-env": "^7.0.3",
     "debug": "~2.6.9",
     "dotenv": "^16.4.5",
